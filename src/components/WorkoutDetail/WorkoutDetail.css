@@ -17,6 +17,7 @@
     height: calc(100vh - 18vmin);
     width: 100%;
 }
+
 .WorkoutDetail .total {
     width: 100%;
     display: grid;
