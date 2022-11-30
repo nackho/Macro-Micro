@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import * as bodypartsAPI from '../../utilities/bodyparts-api'
 
 export default function NewWorkoutPage() {
     const [ dailyGains, setDailyGains ]= useState([])
@@ -8,8 +9,12 @@ export default function NewWorkoutPage() {
     })
 
     useEffect(function() {
-        console.log('first render')
-    }, [])
+        async function getBodyparts() {
+          const bodyparts = await bodypartsAPI.getAll();
+          setDailyGains(bodyparts);
+        }
+        getBodyparts();
+      }, []);
 
     useEffect(function() {
         console.log('dailygain change')
