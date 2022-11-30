@@ -1,10 +1,10 @@
-import './OrderDetail.css';
+import './WorkoutDetail.css';
 
-export default function OrderDetail() {
+export default function WorkoutDetail() {
   return (
-    <div className="OrderDetail">
+    <div className="WorkoutDetail">
       <div className="section-heading">
-        OrderDetail Component
+        WorkoutDetail Component
       </div>
     </div>
   );

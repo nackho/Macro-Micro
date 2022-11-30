@@ -1,20 +1,18 @@
-import './CategoryList.css';
+import './SplitList.css';
 
-export default function CategoryList({ categories, activeCat, setActiveCat }) {
-  const cats = categories.map(cat =>
+export default function SplitList({ splits, activeGroup, setActiveGroup }) {
+  const groups = splits.map(group =>
     <li
-      key={cat}
-      className={cat === activeCat ? 'active' : ''}
-      // FYI, the below will also work, but will give a warning
-      // className={cat === activeCat && 'active'}
-      onClick={() => setActiveCat(cat)}
+      key={group}
+      className={group === activeGroup ? 'active' : ''}
+      onClick={() => setActiveGroup(group)}
     >
-      {cat}
+      {group}
     </li>
   );
   return (
-    <ul className="CategoryList">
-      {cats}
+    <ul className="SplitList">
+      {groups}
     </ul>
   );
 }
