@@ -8,6 +8,7 @@ module.exports = {
 async function index(req, res) {
   const bodyparts = await Bodypart.find({}).sort('name').populate('split').exec();
   // re-sort based upon the sortOrder of the categories
+  console.log('test', bodyparts)
   bodyparts.sort((a, b) => a.split.sortOrder - b.split.sortOrder);
   res.json(bodyparts);
 }
