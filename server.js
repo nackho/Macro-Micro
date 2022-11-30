@@ -19,7 +19,10 @@ app.use(require('./config/checkToken'))
 app.use('/api/users', require('./routes/api/users'))
 
 const ensureLoggedIn = require('./config/ensureLoggedIn');
+const { application } = require('express');
 app.use('/api/bodyparts', ensureLoggedIn, require('./routes/api/bodyparts'));
+
+app.use('/api/workouts', ensureLoggedIn, require('./routes/api/workouts'));
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))

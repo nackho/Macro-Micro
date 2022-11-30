@@ -42,7 +42,7 @@ export default function WorkoutDetail({ workout }) {
             </section>
           </>
           :
-          <div className="hungry">Hungry?</div>
+          <div className="hungry">Choo Choo, All aboard the GAIN TRAIN</div>
         }
       </div>
     </div>
