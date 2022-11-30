@@ -23,7 +23,7 @@ const Bodypart = require('./models/bodypart');
     {name: 'Chest', split: splits[1]},
     {name: 'Front Delts', split: splits[1]},
     {name: 'Side Delts', split: splits[1]},
-    {name: 'Back Delts', split: splits[1]},
+    {name: 'Rear Delts', split: splits[1]},
     {name: 'Triceps', split: splits[1]},
     {name: 'Glutes', split: splits[2]},
     {name: 'Quads', split: splits[2]},
