@@ -3,8 +3,8 @@ const Workout = require('../../models/workout');
 
 module.exports = {
     cart,
-    addToCart,
-    setItemQtyInCart,
+    addBodypartToCart,
+    setBodypartQtyInCart,
     checkout,
   };
   
@@ -15,15 +15,23 @@ module.exports = {
   }
   
   // Add an item to the cart
-  async function addToCart(req, res) {
-  
+  async function addBodypartToCart(req, res) {
+    const cart = await Workout.getCart(req.user._id)
+    await cart.addBodypartToCart(req.params.id)
+    res.json(cart)
   }
   
   // Updates an item's qty in the cart
-  async function setItemQtyInCart(req, res) {
+  async function setBodypartQtyInCart(req, res) {
+    const cart = await Workout.getCart(req.user._id);
+    await cart.setBodypartQty(req.body.bodypartId, req.body.newQty);
+    res.json(cart);
   }
   
   // Update the cart's isPaid property to true
   async function checkout(req, res) {
-  
+    const cart = await Workout.getCart(req.user._id);
+    cart.isComplete = true;
+    await cart.save();
+    res.json(cart);
   }

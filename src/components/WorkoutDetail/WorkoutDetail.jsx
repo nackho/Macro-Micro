@@ -2,13 +2,14 @@ import './WorkoutDetail.css';
 import LineItem from '../LineItem/LineItem';
 
 // Used to display the details of any order, including the cart (unpaid order)
-export default function WorkoutDetail({ workout }) {
+export default function WorkoutDetail({ workout, handleChangeQty, handleCheckout }) {
   if (!workout) return null;
 
   const lineItems = workout.lineItems.map(bodypart =>
     <LineItem
       lineItem={bodypart}
       isComplete={workout.isComplete}
+      handleChangeQty={handleChangeQty}
       key={bodypart._id}
     />
   );
@@ -33,12 +34,11 @@ export default function WorkoutDetail({ workout }) {
                 :
                 <button
                   className="btn-sm"
-                  onClick={() => alert('clicked')}
+                  onClick={handleCheckout}
                   disabled={!lineItems.length}
-                >SUBMIT</button>
+                >GOOD WORK</button>
               }
               <span>{workout.totalQty}</span>
-              <span className="right">${workout.workoutTotal.toFixed(2)}</span>
             </section>
           </>
           :

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as bodypartsAPI from '../../utilities/bodyparts-api';
 import * as workoutsAPI from '../../utilities/workouts-api';
 import './NewWorkoutPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
 import DailyList from '../../components/DailyList/DailyList';
 import SplitList from '../../components/SplitList/SplitList';
@@ -14,6 +14,7 @@ export default function NewWorkoutPage({ user, setUser }) {
     const [ cart, setCart ] = useState(null)
     const [ activeGroup, setActiveGroup ] = useState('')
     const splitsRef = useRef([])
+    const navigate = useNavigate();
 
     useEffect(function() {
         (async function() {
@@ -28,6 +29,21 @@ export default function NewWorkoutPage({ user, setUser }) {
         })();
       }, []);
       
+      async function handleAddToWorkout(bodypartId) {
+        const cart = await workoutsAPI.addBodypartToCart(bodypartId)
+        setCart(cart)
+      }
+
+      async function handleChangeQty(bodypartId, newQty) {
+        const updatedCart = await workoutsAPI.setBodypartQtyInCart(bodypartId, newQty);
+        setCart(updatedCart);
+      }
+
+      async function handleCheckout() {
+        await workoutsAPI.checkout();
+        navigate('/workout');
+      }
+
     return (
       <main className="NewWorkoutPage">
         <aside>
@@ -42,8 +58,9 @@ export default function NewWorkoutPage({ user, setUser }) {
         </aside>
         <DailyList
           dailyGains={dailyGains.filter(bodypart => bodypart.split.name === activeGroup)}
+          handleAddToWorkout={handleAddToWorkout}
         />
-        <WorkoutDetail workout={cart} />
+        <WorkoutDetail workout={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout} />
       </main>
     )
 }

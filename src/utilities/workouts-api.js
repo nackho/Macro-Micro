@@ -8,7 +8,7 @@ export function getCart() {
 }
 
 // Add an item to the cart
-export function addItemToCart(bodypartId) {
+export function addBodypartToCart(bodypartId) {
   // Just send itemId for best security (no pricing)
   return sendRequest(`${BASE_URL}/cart/bodyparts/${bodypartId}`, 'POST');
 }
@@ -16,7 +16,7 @@ export function addItemToCart(bodypartId) {
 // Update the item's qty in the cart
 // Will add the item to the order if not currently in the cart
 // Sending info via the data payload instead of a long URL
-export function setItemQtyInCart(bodypartId, newQty) {
+export function setBodypartQtyInCart(bodypartId, newQty) {
   return sendRequest(`${BASE_URL}/cart/qty`, 'PUT', { bodypartId, newQty });
 }
 
