@@ -27,14 +27,12 @@
 //         <Link to="/workout/new" className="button btn-sm">NEW WORKOUT</Link>
 //         <UserLogOut user={user} setUser={setUser} />
 //       </aside>
-//       {/* Render an OrderList component (needs to be coded) */}
 //       <WorkoutList
 //         workouts={workouts}
 //         selectedWorkout={selectedWorkout}
 //         setSelectedWorkout={setSelectedWorkout}
 //       />
-//       {/* Render the existing OrderDetail component */}
-//       <WorkoutDetail order={selectedWorkout} />
+//       <WorkoutDetail workout={selectedWorkout} />
 //     </main>
 //   );
 // }

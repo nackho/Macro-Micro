@@ -18,12 +18,17 @@ const workoutSchema = new Schema({
     toJSON: { virtuals: true }
 });
 
+// Not Using - delete
+// orderSchema.virtual('orderTotal').get(function() {
+//     return this.lineItems.reduce((total, item) => total + item.extPrice, 0);
+//   });
+
 workoutSchema.virtual('totalQty').get(function() {
     return this.lineItems.reduce((total, bodypart) => total + bodypart.qty, 0)
 });
 
 workoutSchema.virtual('workoutId').get(function() {
-    return this.id.slice(-8).toUpperCase();
+    return this.id.slice(-6).toUpperCase();
 });
 
 workoutSchema.statics.getCart = function(userId) {

@@ -14,7 +14,6 @@ export default function LineItem({ lineItem, isComplete, handleChangeQty }) {
             onClick={() => handleChangeQty(lineItem._id, lineItem.qty-1)}
           >X</button>
         }
-        
       </div>
     </div>
   );
