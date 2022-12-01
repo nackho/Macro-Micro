@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import * as bodypartsAPI from '../../utilities/bodyparts-api'
+import * as bodypartsAPI from '../../utilities/bodyparts-api';
+import * as workoutsAPI from '../../utilities/workouts-api';
 import './NewWorkoutPage.css';
 import { Link } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
@@ -10,18 +11,23 @@ import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
 export default function NewWorkoutPage({ user, setUser }) {
     const [ dailyGains, setDailyGains ] = useState([])
+    const [ cart, setCart ] = useState(null)
     const [ activeGroup, setActiveGroup ] = useState('')
     const splitsRef = useRef([])
 
     useEffect(function() {
-        async function getBodyparts() {
+        (async function() {
           const bodyparts = await bodypartsAPI.getAll();
           splitsRef.current = [...new Set(bodyparts.map(bodypart => bodypart.split.name))]
           setDailyGains(bodyparts);
           setActiveGroup(splitsRef.current[0])
-        }
-        getBodyparts();
+        })();
+        (async function() {
+          const cart = await workoutsAPI.getCart()
+          setCart(cart)
+        })();
       }, []);
+      
     return (
       <main className="NewWorkoutPage">
         <aside>
