@@ -6,8 +6,15 @@ module.exports = {
     addBodypartToCart,
     setBodypartQtyInCart,
     checkout,
+    // forUser,
   };
   
+  // async function forUser(req, res) {
+  //   // get orders for the logged in user
+  //   const workouts = await Workout.find({user: req.user._id, isComplete: true}).sort('-updatedAt');
+  //   res.json(workouts);
+  // }
+
   // A cart is the unpaid order for a user
   async function cart(req, res) {
     const cart = await Workout.getCart(req.user._id)

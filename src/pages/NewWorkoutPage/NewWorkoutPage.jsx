@@ -17,16 +17,18 @@ export default function NewWorkoutPage({ user, setUser }) {
     const navigate = useNavigate();
 
     useEffect(function() {
-        (async function() {
+        async function getBodyparts() {
           const bodyparts = await bodypartsAPI.getAll();
           splitsRef.current = [...new Set(bodyparts.map(bodypart => bodypart.split.name))]
           setDailyGains(bodyparts);
           setActiveGroup(splitsRef.current[0])
-        })();
-        (async function() {
-          const cart = await workoutsAPI.getCart()
+        }
+        getBodyparts();
+        async function getCart() {
+          const cart = await workoutsAPI.getCart();
           setCart(cart)
-        })();
+        }
+        getCart();
       }, []);
       
       async function handleAddToWorkout(bodypartId) {
