@@ -43,7 +43,7 @@ export default function NewWorkoutPage({ user, setUser }) {
         <DailyList
           dailyGains={dailyGains.filter(bodypart => bodypart.split.name === activeGroup)}
         />
-        <WorkoutDetail />
+        <WorkoutDetail workout={cart} />
       </main>
     )
 }
