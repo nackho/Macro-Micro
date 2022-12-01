@@ -6,8 +6,8 @@ require('./config/database');
 const User = require('./models/user');
 const Bodypart = require('./models/bodypart');
 const Split = require('./models/split');
-// const Order = require('./models/order');
+const Workout = require('./models/workout');
 
 // Local variables will come in handy for holding retrieved documents
-let user, bodypart, split, order;
-let users, bodyparts, splits, orders;
+let user, bodypart, split, workout;
+let users, bodyparts, splits, workouts;

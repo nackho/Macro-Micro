@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css';
 import { getUser } from '../../utilities/users-service'
 import AuthPage from '../AuthPage/AuthPage'
@@ -22,6 +22,7 @@ export default function App() {
             <Route path="/workout" element={<WorkoutDetailsPage />} />
             <Route path="/weight/new" element={<NewWeightPage />} />
             <Route path="/weight" element={<WeightDetailsPage />} />
+            <Route path="/*" element={<Navigate to="/workout/new" />} />
           </Routes>
         </>
         :
