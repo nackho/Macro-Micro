@@ -6,7 +6,8 @@ const lineItemSchema = new Schema({
     qty: {type: Number, default: 1 },
     item: bodypartSchema
 }, { 
-    timestamps: true 
+    timestamps: true,
+    toJSON: { virtuals: true }
 });
 
 const workoutSchema = new Schema({
@@ -46,7 +47,9 @@ workoutSchema.methods.addBodypartToCart = async function (bodypartId) {
         lineItem.qty += 1
     } else {
         const bodypart = await mongoose.model('Bodypart').findById(bodypartId);
+        console.log(bodypart)
         cart.lineItems.push(bodypart);
+        console.log(cart.lineItems)
     }
     return cart.save()
 }

@@ -4,7 +4,7 @@
 // export default function WorkoutList({ workouts, selectedWorkout, setSelectedWorkout }) {
 //   const workoutListItems = workouts.map(w =>
 //     <WorkoutListItem
-//       order={w}
+//       workout={w}
 //       isSelected={w === selectedWorkout}
 //       setSelectedWorkout={setSelectedWorkout}
 //       key={w._id}
