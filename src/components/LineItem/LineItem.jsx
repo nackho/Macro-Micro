@@ -4,7 +4,7 @@ export default function LineItem({ lineItem, isComplete, handleChangeQty }) {
   return (
     <div className="LineItem">
       <div className="flex-ctr-ctr flex-col">
-        {/* <span className="align-ctr">{lineItem.item.name}</span> */}
+        <span className="align-ctr">{lineItem.item.name}</span>
       </div>
       <div className="qty" style={{ justifyContent: isComplete && 'center' }}>
         <span>{lineItem.qty}</span>

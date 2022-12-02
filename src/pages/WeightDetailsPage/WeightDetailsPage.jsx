@@ -2,15 +2,9 @@ import * as userService from '../../utilities/users-service'
 
 export default function WeightDetailsPage() {
 
-    async function handleCheckToken() {
-        const expDate = await userService.checkToken()
-        console.log(expDate)
-    }
-
     return (
         <>
-            <h1>WeightDetailsPage</h1>
-            <button onClick={handleCheckToken}>Check When My Login Expires</button>
+            <h1>No Pain, No gain. This project makes me fail pain... so that must mean I am gaining.</h1>
         </>
     )
 }

@@ -5,8 +5,9 @@ import { getUser } from '../../utilities/users-service'
 import AuthPage from '../AuthPage/AuthPage'
 import NewWorkoutPage from '../NewWorkoutPage/NewWorkoutPage'
 import NewWeightPage from '../NewWeightPage/NewWeightPage'
-// import WorkoutHistoryPage from '../WorkoutHistoryPage/WorkoutHistoryPage'
+import WorkoutHistoryPage from '../WorkoutHistoryPage/WorkoutHistoryPage'
 import WeightDetailsPage from '../WeightDetailsPage/WeightDetailsPage'
+import TrackerPage from '../TrackerPage/TrackerPage';
 import NavBar from '../../components/NavBar/NavBar'
 
 export default function App() {
@@ -19,9 +20,10 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Routes>
             <Route path="/workout/new" element={<NewWorkoutPage user={user} setUser={setUser}/>} />
-            {/* <Route path="/workout" element={<WorkoutHistoryPage />} /> */}
+            <Route path="/workout" element={<WorkoutHistoryPage />} />
             <Route path="/weight/new" element={<NewWeightPage />} />
             <Route path="/weight" element={<WeightDetailsPage />} />
+            <Route path="/tracker" element={<TrackerPage />} />
             <Route path="/*" element={<Navigate to="/workout/new" />} />
           </Routes>
         </>

@@ -5,7 +5,7 @@ const workoutsCtrl = require('../../controllers/api/workouts');
 // GET /api/orders/cart
 router.get('/cart', workoutsCtrl.cart);
 // GET /api/orders/user
-// router.get('/user', workoutsCtrl.forUser);
+router.get('/user', workoutsCtrl.forUser);
 // POST /api/orders/cart/items/:id
 router.post('/cart/bodyparts/:id', workoutsCtrl.addBodypartToCart);
 // POST /api/orders/cart/checkout

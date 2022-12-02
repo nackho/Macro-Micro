@@ -10,6 +10,8 @@ export default function NavBar({ user, setUser }) {
 
     return (
         <nav>
+            <Link to="/tracker">Stats</Link>
+            &nbsp; | &nbsp;
             <Link to="/workout">Workouts</Link>
             &nbsp; | &nbsp;
             <Link to="/workout/new">New Workout</Link>

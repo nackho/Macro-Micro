@@ -42,16 +42,16 @@ workoutSchema.statics.getCart = function(userId) {
 
 workoutSchema.methods.addBodypartToCart = async function (bodypartId) { 
     const cart = this
-    const lineItem = cart.lineItems.find(lineItem => lineItem._id.equals(bodypartId));
+    const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(bodypartId));
     if(lineItem) {
         lineItem.qty += 1
     } else {
         const bodypart = await mongoose.model('Bodypart').findById(bodypartId);
-        console.log(bodypart)
-        cart.lineItems.push(bodypart);
+        cart.lineItems.push({item: bodypart});
         console.log(cart.lineItems)
     }
     return cart.save()
+    
 }
 
 workoutSchema.methods.setBodypartQty = function(bodypartId, newQty) {
