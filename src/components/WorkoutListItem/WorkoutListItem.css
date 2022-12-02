@@ -14,7 +14,7 @@
 }
   
 .WorkoutListItem.selected, .WorkoutListItem:not(.selected):hover {
-    border-color: var(--orange);
+    border-color: var(--blue);
     border-width: 0.2vmin;
 }
   

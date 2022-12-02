@@ -10,17 +10,17 @@
     grid-auto-rows: 50vh;
 }
 .tl {
-    background: red;
+    background: white;
 }
 
 .tr {
-    background: blue;
+    background: white;
 }
 
 .bl {
-    background: green;
+    background: white;
 }
 
 .br {
-    background: yellow;
+    background: white;
 }

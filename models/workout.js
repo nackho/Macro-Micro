@@ -19,11 +19,6 @@ const workoutSchema = new Schema({
     toJSON: { virtuals: true }
 });
 
-// Not Using - delete
-// orderSchema.virtual('orderTotal').get(function() {
-//     return this.lineItems.reduce((total, item) => total + item.extPrice, 0);
-//   });
-
 workoutSchema.virtual('totalQty').get(function() {
     return this.lineItems.reduce((total, bodypart) => total + bodypart.qty, 0)
 });

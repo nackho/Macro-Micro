@@ -32,7 +32,6 @@ export default function WorkoutHistoryPage({ user, setUser }) {
       <aside>
         <Logo />
         <Link to="/workout/new" state={null} className="button btn-sm">NEW WORKOUT</Link>
-        {/* <UserLogOut user={user} setUser={setUser} /> */}
       </aside>
       <WorkoutList
         workouts={workouts}
