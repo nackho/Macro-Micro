@@ -48,21 +48,32 @@ workoutSchema.methods.addBodypartToCart = async function (bodypartId) {
     } else {
         const bodypart = await mongoose.model('Bodypart').findById(bodypartId);
         cart.lineItems.push({item: bodypart});
-        console.log(cart.lineItems)
     }
     return cart.save()
-    
 }
 
 workoutSchema.methods.setBodypartQty = function(bodypartId, newQty) {
     const cart = this;
     const lineItem = cart.lineItems.find(lineItem => lineItem._id.equals(bodypartId));
-    if (lineItem && newQty <=0) {
+    if (lineItem && newQty <= 0) {
         lineItem.remove();
     } else if (lineItem) {
         lineItem.qty = newQty;
     }
     return cart.save()
+}
+
+workoutSchema.statics.deleteWorkout = async function(workoutId) {
+    await mongoose.model('Workout').findOneAndDelete({_id: workoutId});
+    return;
+}
+
+workoutSchema.statics.getWorkout = async function(workoutId) {
+    return this.findOneAndUpdate(
+        { _id: workoutId }, 
+        { isComplete: false },
+        { upsert: true, new: true }
+    )
 }
 
 module.exports = mongoose.model('Workout', workoutSchema);

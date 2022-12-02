@@ -1,5 +1,5 @@
 export default function WeightChangeQuad() {
     return (
-        <h1>test weight change</h1>
+        <h1>Placeholder for Weight Change</h1>
         )
 }

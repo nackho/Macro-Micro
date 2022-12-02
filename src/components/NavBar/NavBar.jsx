@@ -14,7 +14,7 @@ export default function NavBar({ user, setUser }) {
             &nbsp; | &nbsp;
             <Link to="/workout">Workouts</Link>
             &nbsp; | &nbsp;
-            <Link to="/workout/new">New Workout</Link>
+            <Link to="/workout/new" state={null}>New Workout</Link>
             &nbsp; | &nbsp;
             <Link to="/weight">Weight</Link>
             &nbsp; | &nbsp;

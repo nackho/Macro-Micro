@@ -19,18 +19,26 @@ export default function WorkoutHistoryPage({ user, setUser }) {
     }
     getWorkouts();
   }, []);
+  
+  async function handleDeleteWorkout(workoutId) {
+    await workoutsAPI.deleteWorkout(workoutId);
+    const updateWorkouts = workouts.filter( workout => workout.id != workoutId)
+    setWorkouts(updateWorkouts);
+  }
+  
 
   return (
     <main className="WorkoutHistoryPage">
       <aside>
         <Logo />
-        <Link to="/workout/new" className="button btn-sm">NEW WORKOUT</Link>
+        <Link to="/workout/new" state={null} className="button btn-sm">NEW WORKOUT</Link>
         {/* <UserLogOut user={user} setUser={setUser} /> */}
       </aside>
       <WorkoutList
         workouts={workouts}
         selectedWorkout={selectedWorkout}
         setSelectedWorkout={setSelectedWorkout}
+        handleDeleteWorkout={handleDeleteWorkout}
       />
       <WorkoutDetail workout={selectedWorkout} />
     </main>

@@ -1,5 +1,5 @@
 export default function CalendarQuad() {
     return (
-    <h1>test calendar</h1>
+    <h1>Placeholder for a calendar</h1>
     )
 }

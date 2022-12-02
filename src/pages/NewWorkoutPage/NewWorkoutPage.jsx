@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as bodypartsAPI from '../../utilities/bodyparts-api';
 import * as workoutsAPI from '../../utilities/workouts-api';
 import './NewWorkoutPage.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
 import DailyList from '../../components/DailyList/DailyList';
 import SplitList from '../../components/SplitList/SplitList';
@@ -15,6 +15,13 @@ export default function NewWorkoutPage({ user, setUser }) {
     const [ activeGroup, setActiveGroup ] = useState('')
     const splitsRef = useRef([])
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isExistingWorkout = location.state;
+    let existingWorkoutId;
+    if (isExistingWorkout) {
+      existingWorkoutId = location.state.workout._id;
+    }
 
     useEffect(function() {
         async function getBodyparts() {
@@ -25,26 +32,38 @@ export default function NewWorkoutPage({ user, setUser }) {
         }
         getBodyparts();
         async function getCart() {
-          const cart = await workoutsAPI.getCart();
-          setCart(cart)
-        }
+          if(isExistingWorkout) {
+            setCart(location.state.workout)
+          } else {
+            const cart = await workoutsAPI.getCart();
+            setCart(cart)
+          }
+        };
         getCart();
-      }, []);
-      
-      async function handleAddToWorkout(bodypartId) {
-        const cart = await workoutsAPI.addBodypartToCart(bodypartId)
-        setCart(cart)
-      }
+    }, []);
+    
+    async function handleAddToWorkout(bodypartId) {
+      const cart = isExistingWorkout ? 
+      await workoutsAPI.addBodypartToWorkout(existingWorkoutId, bodypartId) : 
+      await workoutsAPI.addBodypartToCart(bodypartId)
+      setCart(cart)
+    }
 
-      async function handleChangeQty(bodypartId, newQty) {
-        const updatedCart = await workoutsAPI.setBodypartQtyInCart(bodypartId, newQty);
-        setCart(updatedCart);
-      }
+    async function handleChangeQty(bodypartId, newQty) {
+      const updatedCart = isExistingWorkout ? 
+      await workoutsAPI.setBodypartQtyInWorkout(existingWorkoutId, bodypartId, newQty) :
+      await workoutsAPI.setBodypartQtyInCart(bodypartId, newQty);
+      setCart(updatedCart);
+    }
 
-      async function handleCheckout() {
+    async function handleCheckout() {
+      if (isExistingWorkout) {
+        await workoutsAPI.checkoutWorkout(existingWorkoutId);
+      } else {
         await workoutsAPI.checkout();
-        navigate('/workout');
       }
+      navigate('/workout');
+    }
 
     return (
       <main className="NewWorkoutPage">
@@ -62,7 +81,11 @@ export default function NewWorkoutPage({ user, setUser }) {
           dailyGains={dailyGains.filter(bodypart => bodypart.split.name === activeGroup)}
           handleAddToWorkout={handleAddToWorkout}
         />
-        <WorkoutDetail workout={cart} handleChangeQty={handleChangeQty} handleCheckout={handleCheckout} />
+        <WorkoutDetail
+          workout={cart} 
+          handleChangeQty={handleChangeQty} 
+          handleCheckout={handleCheckout} 
+        />
       </main>
     )
 }
